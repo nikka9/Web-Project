@@ -95,10 +95,13 @@ dotnet ef database update \
   --startup-project src/Store.API
 ```
 
-The default connection string uses SQLite:
+The default connection string uses SQL Server Express:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "Data Source=store.db"
+  "DefaultConnection": "Server=LAB322PC21\\SQLEXPRESS;Database=StoreDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
 }
 ```
+
+If your SQL Server instance name is different, change only the `Server=` value in
+`src/Store.API/appsettings.json`.

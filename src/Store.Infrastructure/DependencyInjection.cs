@@ -19,10 +19,10 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var connectionString = configuration["ConnectionStrings:DefaultConnection"]
-            ?? "Data Source=store.db";
+            ?? "Server=LAB322PC21\\SQLEXPRESS;Database=StoreDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 
         services.AddDbContext<StoreDbContext>(options =>
-            options.UseSqlite(connectionString));
+            options.UseSqlServer(connectionString));
 
         services.Configure<JwtOptions>(configuration.GetSection(JwtOptions.SectionName));
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
