@@ -78,7 +78,8 @@ Install the EF CLI if needed:
 dotnet tool install --global dotnet-ef
 ```
 
-Create the initial migration:
+An initial SQL Server migration is already included in the project. If you ever
+delete migrations and need to create it again, run:
 
 ```bash
 dotnet ef migrations add InitialCreate \
@@ -105,3 +106,7 @@ The default connection string uses SQL Server Express:
 
 If your SQL Server instance name is different, change only the `Server=` value in
 `src/Store.API/appsettings.json`.
+
+If registration returns HTTP 500, first run `dotnet ef database update` and
+confirm SQL Server is running and the `Server=` name matches the value shown in
+SQL Server Management Studio.

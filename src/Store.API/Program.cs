@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Store.Application;
 using Store.API.Middleware;
 using Store.Infrastructure;
+using Store.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,13 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
+    dbContext.Database.Migrate();
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
